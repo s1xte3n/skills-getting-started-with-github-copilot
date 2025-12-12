@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const activitiesList = document.getElementById("activities-list");
+  const participantsList = document.getElementById("participants-list");
   const activitySelect = document.getElementById("activity");
   const signupForm = document.getElementById("signup-form");
   const messageDiv = document.getElementById("message");
@@ -10,8 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("/activities");
       const activities = await response.json();
 
-      // Clear loading message
+      // Clear loading messages
       activitiesList.innerHTML = "";
+      participantsList.innerHTML = "";
 
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
@@ -25,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
-          ${details.participants.length > 0 ? `<p><strong>Participants:</strong></p><ul>${details.participants.map(participant => `<li>${participant}</li>`).join('')}</ul>` : '<p><strong>Participants:</strong> None yet</p>'}
         `;
 
         activitiesList.appendChild(activityCard);
@@ -35,9 +36,29 @@ document.addEventListener("DOMContentLoaded", () => {
         option.value = name;
         option.textContent = name;
         activitySelect.appendChild(option);
+
+        // Populate participants list
+        if (details.participants.length > 0) {
+          const participantCard = document.createElement("div");
+          participantCard.className = "participant-card";
+
+          participantCard.innerHTML = `
+            <h4>${name}</h4>
+            <ul>
+              ${details.participants.map(participant => `<li>${participant}</li>`).join('')}
+            </ul>
+          `;
+
+          participantsList.appendChild(participantCard);
+        }
       });
+
+      if (participantsList.children.length === 0) {
+        participantsList.innerHTML = "<p>No participants yet.</p>";
+      }
     } catch (error) {
       activitiesList.innerHTML = "<p>Failed to load activities. Please try again later.</p>";
+      participantsList.innerHTML = "<p>Failed to load participants. Please try again later.</p>";
       console.error("Error fetching activities:", error);
     }
   }

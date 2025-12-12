@@ -37,7 +37,7 @@ main {
 
 @media (min-width: 768px) {
   main {
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
@@ -84,6 +84,31 @@ section h3 {
   margin-bottom: 5px;
   font-size: 14px;
   color: #0000;
+}
+
+.participant-card {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.participant-card h4 {
+  margin-bottom: 10px;
+  color: #0066cc;
+}
+
+.participant-card ul {
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.participant-card li {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
 }
 
 .form-group {
