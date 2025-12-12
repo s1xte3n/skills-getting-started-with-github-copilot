@@ -29,10 +29,10 @@ header h1 {
 }
 
 main {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 30px;
-  justify-content: center;
+  justify-items: center;
 }
 
 @media (min-width: 768px) {
@@ -72,6 +72,18 @@ section h3 {
 
 .activity-card p {
   margin-bottom: 8px;
+}
+
+.activity-card ul {
+  margin-top: 10px;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.activity-card li {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
 }
 
 .form-group {
